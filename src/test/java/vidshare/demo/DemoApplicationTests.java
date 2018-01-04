@@ -1,16 +1,19 @@
 package vidshare.demo;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import test.VideoCounter;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
+		VideoCounter videoCounter = new VideoCounter();
+		Assert.assertEquals(2, videoCounter.getVideosCount());
+
 	}
 
 }
