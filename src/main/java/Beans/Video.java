@@ -1,9 +1,5 @@
 package Beans;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "video")
 public class Video {
 
     private String id;
@@ -18,9 +14,13 @@ public class Video {
         this.name = name;
     }
 
-    @Id
-    @Column(name="videoId")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public Video(String id, String name, int likes) {
+        this.id = id;
+        this.name = name;
+        this.likes = likes;
+    }
+
+
     public String getId() {
         return id;
     }

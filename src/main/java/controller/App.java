@@ -1,10 +1,10 @@
-package vidshare.demo;
+package controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import test.VideoCounter;
+import videos.VideoCounter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +28,7 @@ public class App {
     public ModelAndView upload(@RequestParam("file") MultipartFile file) throws IOException {
 
         VideoCounter videoCounter = new VideoCounter();
-        File cFile = new File("C:\\_ws\\VidShare\\src\\main\\resources\\static\\Videos\\"+ (videoCounter.getVideosCount()+1)+".mp4");
+        File cFile = new File(getClass().getResource("/static/Videos").getPath()+"/"+ (videoCounter.getVideosCount()+1)+".mp4");
         cFile.createNewFile();
         FileOutputStream out = new FileOutputStream(cFile);
         out.write(file.getBytes());

@@ -9,7 +9,7 @@ public interface DAO {
     public void addVideo(Video p);
     public void updateVideo(Video p);
     public List<Video> listVideo();
-    public Video getPersonById(int id);
+    public Video getVideoById(int id);
     public void removeVideo(int id);
 
 }

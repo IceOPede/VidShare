@@ -1,4 +1,4 @@
-package test;
+package videos;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.List;
 public class VideoCounter {
 
     public int getVideosCount(){
-        int count = new File("D:\\_WS_IntelliJ\\VidShare\\src\\main\\resources\\static\\Videos").list().length;
+        int count = new File(getClass().getResource("/static/Videos").getPath()).list().length;
         return count;
     }
 
     public List<String> getVideoPathList(){
-        String[] fileList =  new File("D:\\_WS_IntelliJ\\VidShare\\src\\main\\resources\\static\\Videos").list();
+        String[] fileList =  new File(getClass().getResource("/static/Videos").getPath()).list();
         return new ArrayList<>(Arrays.asList(fileList));
     }
 }
