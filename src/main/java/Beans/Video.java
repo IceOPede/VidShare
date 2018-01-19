@@ -5,6 +5,10 @@ public class Video {
     private String id;
     private String name;
     private int likes;
+    private enum type {
+        LINK,
+        VIDEO
+    }
 
     private String path;
 
@@ -18,6 +22,11 @@ public class Video {
         this.id = id;
         this.name = name;
         this.likes = likes;
+    }
+
+    public Video(String name) {
+        this.name = name;
+        this.likes = 0;
     }
 
 
@@ -52,4 +61,9 @@ public class Video {
     public void setLikes(int likes) {
         this.likes = likes;
     }
+
+    public void liked(){
+        this.likes = likes +1;
+    }
+
 }

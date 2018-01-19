@@ -5,5 +5,6 @@
 
     <import resource="spring/database/Spring-Datasource.xml" />
     <import resource="spring/video/Spring-Video.xml" />
+    <import resource="spring/person/Spring-Person.xml" />
 
 </beans>

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Starter Template - Materialize</title>
+    <title>Upload</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -31,19 +31,19 @@
 <body>
 
 <header>
-
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="Index.html" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
+            <ul class="right">
                 <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
+                <li><a href="register.html"><i class="material-icons left">person_add</i>Register</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
 <main>
-
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
@@ -56,7 +56,7 @@
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>File</span>
-                        <input type="file" name="file"/>
+                        <input type="file" name="file" required="" aria-required="true"/>
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text" value="Select a File"/>
@@ -66,6 +66,10 @@
                     <i class="material-icons right">send</i>
                 </button>
                 <!--<input class="btn waves-effect waves-light right" type="submit" value="Upload" />-->
+
+                <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                <h3 id="status"></h3>
+                <p id="loaded_n_total"></p>
             </form>
         </div>
     </div>

@@ -8,10 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class VideoDAO implements DAO {
+public class VideoDAO {
 
     private DataSource dataSource;
 
@@ -19,22 +20,90 @@ public class VideoDAO implements DAO {
         this.dataSource = dataSource;
     }
 
-    @Override
     public void addVideo(Video p) {
+        String sql = "INSERT INTO VIDEO (name, LIKES) VALUES (?, ?)";
 
+        Connection conn = null;
+
+        try {
+
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, p.getName());
+            ps.setInt(2, p.getLikes());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
 
-    @Override
     public void updateVideo(Video p) {
 
+        String sql = "UPDATE VIDEO SET LIKES = ? WHERE VIDEOID =?";
+
+        Connection conn = null;
+
+        try {
+
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getLikes());
+            ps.setString(2, p.getId());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+
     }
 
-    @Override
     public List<Video> listVideo() {
-        return null;
+        List<Video> videoNameList = new ArrayList<>();
+
+        String sql = "SELECT * FROM VIDEO";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                videoNameList.add(new Video(rs.getString("VIDEOID"), rs.getString("NAME"), rs.getInt("LIKES")));
+
+            }
+            rs.close();
+            ps.close();
+            return videoNameList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
     }
 
-    @Override
     public Video getVideoById(int id) {
 
         String sql = "SELECT * FROM VIDEO WHERE VIDEOID = ?";
@@ -68,8 +137,71 @@ public class VideoDAO implements DAO {
         }
     }
 
-    @Override
     public void removeVideo(int id) {
 
     }
+
+    public Video getVideobyName(String name){
+
+        String sql = "SELECT * FROM VIDEO WHERE NAME = ?";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            Video video = null;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                video = new Video(
+                        rs.getString("VIDEOID"),
+                        rs.getString("NAME"),
+                        rs.getInt("LIKES")
+                );
+            }
+            rs.close();
+            ps.close();
+            return video;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+
+    }
+
+    public List<String> getVideoNameList(){
+
+        List<String> videoNameList = new ArrayList<>();
+
+        String sql = "SELECT * FROM VIDEO";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                videoNameList.add(rs.getString("NAME"));
+            }
+            rs.close();
+            ps.close();
+            return videoNameList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
+
 }

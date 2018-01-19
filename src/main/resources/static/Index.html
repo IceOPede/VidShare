@@ -3,15 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Starter Template - Materialize</title>
+    <title>Home</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 
     <script>
 
@@ -25,14 +25,60 @@
                     para.className = "responsive-video";
                     para.setAttribute("controls", true);
                     var node = document.createElement("source");
-                    node.setAttribute("src", "Videos/" + value[i]);
+                    node.setAttribute("src", "Videos/" + value[i].name);
                     node.setAttribute("type", "video/mp4");
                     para.appendChild(node);
+
+                    var container = document.createElement("div");
+                    container.setAttribute("class", "section");
+
+                    var row = document.createElement("div");
+                    row.setAttribute("class", "row");
+
+                    var button = document.createElement("button");
+                    button.className = "btn right-align waves-effect waves-light col s4";
+                    button.setAttribute("type", "submit");
+                    button.setAttribute("name", "action");
+                    button.setAttribute("id", value[i].name);
+                    button.setAttribute("onclick", "liked(this.id)");
+
+                    var likes = document.createElement("span");
+                    likes.setAttribute("class", "black-text col s1 offset-s7");
+                    likes.setAttribute("id", "text/"+value[i].name);
+                    likes.style["font-size"] = "25px";
+                    var likesText = document.createTextNode(value[i].likes);
+                    likes.appendChild(likesText);
+
+
+                    var icon = document.createElement("i");
+                    icon.setAttribute("class", "material-icons right");
+                    var iconText = document.createTextNode("favorite_border");
+                    icon.appendChild(iconText);
+                    button.appendChild(icon);
+
+                    var buttonText = document.createTextNode("Like");
+                    button.appendChild(buttonText);
+
+                    row.appendChild(likes);
+                    row.appendChild(button);
+
+
                     var element = document.getElementById("videoContainer");
                     element.appendChild(para);
+                    element.appendChild(row);
                 }
             })
         });
+
+        function liked(clicked_id) {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/like",
+                data: { name: clicked_id } // parameters
+            }).then(function (value) {
+                document.getElementById("text/"+clicked_id).innerText = value;
+            })
+        }
 
     </script>
 
@@ -42,16 +88,20 @@
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<!--<script src="js/init.js"></script>-->
 
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="Index.html" class="brand-logo">Logo</a>
-        <ul class="right">
-            <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
-        </ul>
-    </div>
-</nav>
+<header>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="Index.html" class="brand-logo">Logo</a>
+            <ul class="right">
+                <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
+                <li><a href="register.html"><i class="material-icons left">person_add</i>Register</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -68,7 +118,6 @@
 
 <div class="container">
     <div class="section">
-
         <!--   Icon Section   -->
         <div class="col s12 m4">
             <div class="icon-block">
@@ -77,11 +126,8 @@
                 <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
                     our custom components. Additionally, we refined animations and transitions to provide a smoother
                     experience for developers.</p>
-
-                <div id="videoContainer">
-
-                </div>
-
+                    <div id="videoContainer">
+                    </div>
             </div>
         </div>
 
