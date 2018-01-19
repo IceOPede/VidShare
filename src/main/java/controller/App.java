@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import videos.VideoCounter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -73,15 +72,17 @@ public class App {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
 
-        boolean check = personDAO.checkPersonByEmail(email, pw);
+        Person check = personDAO.checkPersonByEmail(email, pw);
 
-        if (check) {
-            System.out.println("success");
+//        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+
+        if (check != null) {
+            return new ModelAndView("redirect:Index.html");
         } else {
-            System.out.println("Error");
+            return new ModelAndView("redirect:login.html");
         }
 
-        return new ModelAndView("redirect:Index.html");
+
     }
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)

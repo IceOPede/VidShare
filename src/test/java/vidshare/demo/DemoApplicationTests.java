@@ -4,6 +4,7 @@ import Beans.Person;
 import Beans.Video;
 import DB.PersonDAO;
 import DB.VideoDAO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DemoApplicationTests {
 
 	@Test
+	@Ignore
 	public void contextLoads() {
 
 		ApplicationContext context =

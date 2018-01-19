@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -44,7 +44,7 @@
 
                     var likes = document.createElement("span");
                     likes.setAttribute("class", "black-text col s1 offset-s7");
-                    likes.setAttribute("id", "text/"+value[i].name);
+                    likes.setAttribute("id", "text/" + value[i].name);
                     likes.style["font-size"] = "25px";
                     var likesText = document.createTextNode(value[i].likes);
                     likes.appendChild(likesText);
@@ -74,9 +74,9 @@
             $.ajax({
                 type: "POST",
                 url: "http://localhost:8080/like",
-                data: { name: clicked_id } // parameters
+                data: {name: clicked_id} // parameters
             }).then(function (value) {
-                document.getElementById("text/"+clicked_id).innerText = value;
+                document.getElementById("text/" + clicked_id).innerText = value;
             })
         }
 
@@ -106,12 +106,7 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
-        <h1 class="header center orange-text">Starter Template</h1>
-        <div class="row center">
-            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <br><br>
-
+        <h1 class="header center orange-text">All Videos</h1>
     </div>
 </div>
 
@@ -121,13 +116,8 @@
         <!--   Icon Section   -->
         <div class="col s12 m4">
             <div class="icon-block">
-                <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-                <h5 class="center">Speeds up development</h5>
-                <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
-                    our custom components. Additionally, we refined animations and transitions to provide a smoother
-                    experience for developers.</p>
-                    <div id="videoContainer">
-                    </div>
+                <div id="videoContainer">
+                </div>
             </div>
         </div>
 

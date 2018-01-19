@@ -93,7 +93,7 @@ public class PersonDAO {
 
     }
 
-    public boolean checkPersonByEmail(String email, String pw) {
+    public Person checkPersonByEmail(String email, String pw) {
 
         String sql = "SELECT * FROM PERSON WHERE email=? AND pw=?";
 
@@ -106,16 +106,15 @@ public class PersonDAO {
             ps.setString(1, email);
             ps.setString(2, pw);
             ResultSet rs = ps.executeQuery();
-
+            Person person = null;
             if (rs.next()) {
-                rs.close();
-                ps.close();
-                return true;
-            } else {
-                rs.close();
-                ps.close();
-                return false;
+                person = new Person(rs.getString("PERSONID"),
+                        rs.getString("NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PW")
+                );
             }
+            return person;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
