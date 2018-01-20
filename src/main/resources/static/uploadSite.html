@@ -13,11 +13,22 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <script src="js/materialize.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script>
+        $(document).ready(function () {
+            var getUrl = window.location.host;
+
+            var uploadForm = document.getElementById("uploadForm");
+            uploadForm.setAttribute("action", "http://" + getUrl + "/upload");
+
+            var uploadURLForm = document.getElementById("uploadURLForm");
+            uploadURLForm.setAttribute("action", "http://" + getUrl + "/uploadURL");
+        });
+    </script>
 
 </head>
 <body>
-
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -40,7 +51,7 @@
                 <h5 class="header col s12 light">Select a File that you want to upload</h5>
             </div>
             <br><br>
-            <form action="http://localhost:8080/upload" method="POST" enctype="multipart/form-data">
+            <form id="uploadForm" method="POST" enctype="multipart/form-data" >
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>File</span>
@@ -58,7 +69,7 @@
                 <!--<p id="loaded_n_total"></p>-->
             </form>
 
-            <form action="http://localhost:8080/uploadURL" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data" id="uploadURLForm">
                 <div class="file-field input-field">
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="url" placeholder="Enter a URL" name="URL" required/>

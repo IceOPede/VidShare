@@ -1,6 +1,8 @@
+var getUrl = window.location.host;
+
 $(document).ready(function () {
     $.ajax({
-        url: "http://localhost:8080/getVideos"
+        url: "http://"+getUrl+"/getVideos"
     }).then(function (value) {
 
         for (i = 0; i < value.length; i++) {
@@ -108,7 +110,7 @@ $(document).ready(function () {
 function liked(clicked_id) {
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/like",
+        url: "http://"+getUrl+"/like",
         data: {name: clicked_id} // parameters
     }).then(function (value) {
         document.getElementById("text/" + clicked_id).innerText = value;

@@ -13,11 +13,19 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <script src="js/materialize.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script>
+        $(document).ready(function () {
+            var getUrl = window.location.host;
+
+            var loginForm = document.getElementById("loginForm");
+            loginForm.setAttribute("action", "http://" + getUrl + "/loginUser");
+        });
+    </script>
 
 </head>
 <body>
-
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -38,16 +46,15 @@
             <br><br>
             <h1 class="header center orange-text">Login</h1>
             <div class="row center">
-                <form action="http://localhost:8080/loginUser" method="POST">
-                    <p>Email</p><input type="email" name="email" />
-                    <p>Passwort</p><input type="password" name="pw" />
+                <form id="loginForm" method="POST">
+                    <p>Email</p><input type="email" name="email" required/>
+                    <p>Passwort</p><input type="password" name="pw" required/>
                     <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </form>
             </div>
             <br><br>
-
         </div>
     </div>
 

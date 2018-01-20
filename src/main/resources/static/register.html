@@ -13,11 +13,19 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <script src="js/materialize.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script>
+        $(document).ready(function () {
+            var getUrl = window.location.host;
+
+            var registerUserForm = document.getElementById("registerUserForm");
+            registerUserForm.setAttribute("action", "http://" + getUrl + "/registerUser");
+        });
+    </script>
 
 </head>
 <body>
-
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -38,10 +46,10 @@
             <br><br>
             <h1 class="header center orange-text">Register</h1>
             <div class="row center">
-                <form action="http://localhost:8080/registerUser" method="POST">
-                    <p>Name</p><input type="text" name="name" />
-                    <p>Email</p><input type="email" name="email" />
-                    <p>Passwort</p><input type="password" name="pw" />
+                <form id="registerUserForm" method="POST">
+                    <p>Name</p><input type="text" name="name" required/>
+                    <p>Email</p><input type="email" name="email" required/>
+                    <p>Passwort</p><input type="password" name="pw" required/>
                     <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>

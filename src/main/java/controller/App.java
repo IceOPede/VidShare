@@ -89,8 +89,10 @@ public class App {
 //        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 
         if (check != null) {
+            System.out.println("Success");
             return new ModelAndView("redirect:Index.html");
         } else {
+            System.out.println("Error");
             return new ModelAndView("redirect:login.html");
         }
 
