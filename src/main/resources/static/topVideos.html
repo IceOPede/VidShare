@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Register</title>
+    <title>Home</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <script src="js/materialize.min.js"></script>
+    <!--<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <script>
-        $(document).ready(function () {
-            var getUrl = window.location.host;
-
-            var registerUserForm = document.getElementById("registerUserForm");
-            registerUserForm.setAttribute("action", "http://" + getUrl + "/registerUser");
-        });
-    </script>
-
 </head>
 <body>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<!--<script src="js/init.js"></script>-->
+
+<script src="Scripts/topVideoScript.js"></script>
+
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -40,28 +39,27 @@
     </nav>
 </header>
 
-<main>
-
-    <div class="section no-pad-bot" id="index-banner">
-        <div class="container">
-            <br><br>
-            <h1 class="header center orange-text">Register</h1>
-            <div class="row center">
-                <form id="registerUserForm" method="POST">
-                    <p>Name</p><input type="text" name="name" required/>
-                    <p>Email</p><input type="email" name="email" required/>
-                    <p>Passwort</p><input type="password" name="pw" required/>
-                    <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                </form>
-            </div>
-            <br><br>
-
-        </div>
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Top Videos</h1>
     </div>
+</div>
 
-</main>
+
+<div class="container">
+    <div class="section">
+        <!--   Icon Section   -->
+        <div class="col s12 m4">
+            <div class="icon-block">
+                <div id="videoContainer">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+</div>
 
 <footer class="page-footer orange">
     <div class="container">
@@ -71,6 +69,8 @@
                 <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
                     our full time job. Any amount would help support and continue development on this project and is
                     greatly appreciated.</p>
+
+
             </div>
             <div class="col l3 s12">
                 <h5 class="white-text">Settings</h5>

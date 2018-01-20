@@ -210,4 +210,41 @@ public class VideoDAO {
         }
     }
 
+    public List<Video> getTopVideos(){
+
+        List<Video> videoList = new ArrayList<>();
+
+        String sql = "SELECT * FROM VIDEO ORDER BY likes DESC LIMIT 10";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                videoList.add(new Video(
+                        rs.getString("VIDEOID"),
+                        rs.getString("NAME"),
+                        rs.getString("TYPE"),
+                        rs.getInt("LIKES")));
+
+            }
+            rs.close();
+            ps.close();
+
+
+
+            return videoList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+    }
+
 }

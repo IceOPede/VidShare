@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,7 +54,7 @@ public class App {
     }
 
     @RequestMapping(value = "/uploadURL", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ModelAndView upload(@RequestParam("URL") String url) throws IOException {
+    public ModelAndView uploadURL(@RequestParam("URL") String url) throws IOException {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
@@ -109,6 +110,16 @@ public class App {
         video.liked();
         videoDAO.updateVideo(video);
         return video.getLikes();
+    }
+
+    @RequestMapping(value = "/allTopVideos")
+    public List<Video> topVideos() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+
+        List<Video> videoList = videoDAO.getTopVideos();
+
+        return videoList;
     }
 
 }
