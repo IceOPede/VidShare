@@ -20,7 +20,7 @@ public class VideoDAO {
     }
 
     public void addVideo(Video p) {
-        String sql = "INSERT INTO VIDEO (name, LIKES) VALUES (?, ?)";
+        String sql = "INSERT INTO VIDEO (NAME, LIKES, TYPE) VALUES (?, ?, ?)";
 
         Connection conn = null;
 
@@ -30,6 +30,7 @@ public class VideoDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, p.getName());
             ps.setInt(2, p.getLikes());
+            ps.setString(3, p.getType().name());
             ps.executeUpdate();
             ps.close();
 
@@ -86,7 +87,11 @@ public class VideoDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                videoNameList.add(new Video(rs.getString("VIDEOID"), rs.getString("NAME"), rs.getInt("LIKES")));
+                videoNameList.add(new Video(
+                        rs.getString("VIDEOID"),
+                        rs.getString("NAME"),
+                        rs.getString("TYPE"),
+                        rs.getInt("LIKES")));
 
             }
             rs.close();
@@ -119,6 +124,7 @@ public class VideoDAO {
                 video = new Video(
                         rs.getString("VIDEOID"),
                         rs.getString("NAME"),
+                        rs.getString("TYPE"),
                         rs.getInt("LIKES")
                 );
             }
@@ -156,6 +162,7 @@ public class VideoDAO {
                 video = new Video(
                         rs.getString("VIDEOID"),
                         rs.getString("NAME"),
+                        rs.getString("TYPE"),
                         rs.getInt("LIKES")
                 );
             }

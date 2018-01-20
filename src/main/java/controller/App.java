@@ -46,7 +46,19 @@ public class App {
         FileOutputStream out = new FileOutputStream(cFile);
         out.write(file.getBytes());
 
-        Video video = new Video(""+(videoList.size() + 1) + ".mp4");
+        Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
+        videoDAO.addVideo(video);
+
+        return new ModelAndView("redirect:Index.html");
+    }
+
+    @RequestMapping(value = "/uploadURL", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ModelAndView upload(@RequestParam("URL") String url) throws IOException {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+
+        Video video = new Video("http://www.youtube.com/embed/"+url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
 
         videoDAO.addVideo(video);
 

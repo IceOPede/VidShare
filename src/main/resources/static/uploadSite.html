@@ -13,19 +13,7 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <script src="js/materialize.min.js"></script>
 
-    <style>
-
-        body {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1 0 auto;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 <body>
@@ -56,7 +44,7 @@
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>File</span>
-                        <input type="file" name="file" required="" aria-required="true"/>
+                        <input type="file" name="file" required/>
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text" value="Select a File"/>
@@ -65,12 +53,22 @@
                 <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>
-                <!--<input class="btn waves-effect waves-light right" type="submit" value="Upload" />-->
-
-                <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                <h3 id="status"></h3>
-                <p id="loaded_n_total"></p>
+                <!--<progress id="progressBar" value="0" max="100" style="width:300px;"></progress>-->
+                <!--<h3 id="status"></h3>-->
+                <!--<p id="loaded_n_total"></p>-->
             </form>
+
+            <form action="http://localhost:8080/uploadURL" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="url" placeholder="Enter a URL" name="URL" required/>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+
         </div>
     </div>
 
