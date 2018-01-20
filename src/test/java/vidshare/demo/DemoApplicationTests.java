@@ -26,6 +26,7 @@ public class DemoApplicationTests {
 	}
 
 	@Test
+	@Ignore
 	public void test(){
 
 		ApplicationContext context =
