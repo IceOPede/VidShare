@@ -6,7 +6,6 @@ import DB.PersonDAO;
 import DB.VideoDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,7 +32,7 @@ public class App {
         return videoList;
     }
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam("file") MultipartFile file) throws IOException {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
@@ -53,7 +51,7 @@ public class App {
         return new ModelAndView("redirect:index.html");
     }
 
-    @RequestMapping(value = "/uploadURL", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @RequestMapping(value = "/uploadURL", method = RequestMethod.POST)
     public ModelAndView uploadURL(@RequestParam("URL") String url) throws IOException {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
