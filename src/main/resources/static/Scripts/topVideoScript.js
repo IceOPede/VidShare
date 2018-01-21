@@ -10,7 +10,7 @@ $(document).ready(function () {
 
                 var number = document.createElement("span");
                 number.setAttribute("class", "black-text col s1");
-                number.setAttribute("id", "text/" + value[i].name);
+                number.setAttribute("id", "text/" + value[i].url);
                 number.style["font-size"] = "35px";
                 var numberText = document.createTextNode((i+1)+"#");
                 number.appendChild(numberText);
