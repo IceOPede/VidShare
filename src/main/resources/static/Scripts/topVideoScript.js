@@ -2,7 +2,7 @@ var getUrl = window.location.host;
 
 $(document).ready(function () {
     $.ajax({
-        url: "http://"+getUrl+"/allTopVideos"
+        url: "https://"+getUrl+"/allTopVideos"
     }).then(function (value) {
 
         for (i = 0; i < value.length; i++) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
 function liked(clicked_id) {
     $.ajax({
         type: "POST",
-        url: "http://"+getUrl+"/like",
+        url: "https://"+getUrl+"/like",
         data: {name: clicked_id} // parameters
     }).then(function (value) {
         document.getElementById("text/" + clicked_id).innerText = value;
