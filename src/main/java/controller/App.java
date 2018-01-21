@@ -4,19 +4,23 @@ import Beans.Person;
 import Beans.Video;
 import DB.PersonDAO;
 import DB.VideoDAO;
+import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 @RestController
 public class App {
+
+    private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
 
     public App() {
     }
@@ -33,7 +37,7 @@ public class App {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public ModelAndView upload(@RequestParam("file") MultipartFile file) throws IOException {
+    public ModelAndView upload(@RequestParam("file") MultipartFile file) throws IOException, DbxException {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
@@ -44,6 +48,12 @@ public class App {
         cFile.createNewFile();
         FileOutputStream out = new FileOutputStream(cFile);
         out.write(file.getBytes());
+
+        DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
+        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+
+        InputStream in =  new BufferedInputStream(file.getInputStream());
+        FileMetadata metadata = client.files().uploadBuilder("/static/Videos/"+(videoList.size() + 1) + ".mp4").uploadAndFinish(in);
 
         Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
