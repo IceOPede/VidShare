@@ -10,7 +10,7 @@ $(document).ready(function () {
 
                 var number = document.createElement("span");
                 number.setAttribute("class", "black-text col s1");
-                number.setAttribute("id", "text/" + value[i].url);
+                number.setAttribute("id", "text/" + value[i].name);
                 number.style["font-size"] = "35px";
                 var numberText = document.createTextNode((i+1)+"#");
                 number.appendChild(numberText);
@@ -19,7 +19,7 @@ $(document).ready(function () {
                 para.className = "responsive-video";
                 para.setAttribute("controls", true);
                 var node = document.createElement("source");
-                node.setAttribute("src", "" + value[i].name);
+                node.setAttribute("src", "" + value[i].url);
                 node.setAttribute("type", "video/mp4");
                 para.appendChild(node);
 
