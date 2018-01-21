@@ -5,6 +5,7 @@ public class Video {
     private String id;
     private String name;
     private int likes;
+    private String url;
     private Type type;
 
     public enum Type {
@@ -81,5 +82,13 @@ public class Video {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -11,7 +11,7 @@ $(document).ready(function () {
                 para.className = "responsive-video";
                 para.setAttribute("controls", true);
                 var node = document.createElement("source");
-                node.setAttribute("src", "" + value[i].name);
+                node.setAttribute("src", "" + value[i].url);
                 node.setAttribute("type", "video/mp4");
                 para.appendChild(node);
 

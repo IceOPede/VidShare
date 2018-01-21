@@ -43,7 +43,7 @@ public class App {
                 ListFolderResult result = client.files().listFolder("/static/Videos");
                 for (Metadata metadata : result.getEntries()){
                     if (metadata.getName().equals(video.getName())){
-                        video.setName(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
+                        video.setUrl(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
                     }
                 }
             }
