@@ -59,7 +59,7 @@ public class App {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
 
-        Video video = new Video("http://www.youtube.com/embed/"+url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
+        Video video = new Video("https://www.youtube.com/embed/"+url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
 
         videoDAO.addVideo(video);
 
