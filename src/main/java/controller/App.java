@@ -44,10 +44,10 @@ public class App {
 
         List<String> videoList =  videoDAO.getVideoNameList();
 
-        File cFile = new File(getClass().getResource("/static/Videos").getPath() + "/" + (videoList.size() + 1) + ".mp4");
-        cFile.createNewFile();
-        FileOutputStream out = new FileOutputStream(cFile);
-        out.write(file.getBytes());
+//        File cFile = new File(getClass().getResource("/static/Videos").getPath() + "/" + (videoList.size() + 1) + ".mp4");
+//        cFile.createNewFile();
+//        FileOutputStream out = new FileOutputStream(cFile);
+//        out.write(file.getBytes());
 
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
