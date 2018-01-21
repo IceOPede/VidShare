@@ -36,7 +36,9 @@ public class App {
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
-        for (Video video: videoDAO.listVideo()){
+        List<Video> videoList = videoDAO.listVideo();
+
+        for (Video video: videoList){
             if (video.getType().name().equals(Video.Type.VIDEO.name())){
                 ListFolderResult result = client.files().listFolder("/static/Videos");
                 for (Metadata metadata : result.getEntries()){
@@ -46,8 +48,6 @@ public class App {
                 }
             }
         }
-
-        List<Video> videoList = videoDAO.listVideo();
 
         return videoList;
     }
