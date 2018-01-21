@@ -7,6 +7,14 @@ $(document).ready(function () {
 
         for (i = 0; i < value.length; i++) {
             if (value[i].type == "VIDEO") {
+
+                var number = document.createElement("span");
+                number.setAttribute("class", "black-text col s1");
+                number.setAttribute("id", "text/" + value[i].name);
+                number.style["font-size"] = "35px";
+                var numberText = document.createTextNode((i+1)+"#");
+                number.appendChild(numberText);
+
                 var para = document.createElement("video");
                 para.className = "responsive-video";
                 para.setAttribute("controls", true);
@@ -50,9 +58,18 @@ $(document).ready(function () {
 
 
                 var element = document.getElementById("videoContainer");
+                element.appendChild(number);
                 element.appendChild(para);
                 element.appendChild(row);
+
             } else if (value[i].type == "LINK"){
+
+                var number = document.createElement("span");
+                number.setAttribute("class", "black-text col s1");
+                number.setAttribute("id", "text/" + value[i].name);
+                number.style["font-size"] = "35px";
+                var numberText = document.createTextNode((i+1)+"#");
+                number.appendChild(numberText);
 
                 var para = document.createElement("div");
                 para.className = "video-container";
@@ -99,6 +116,7 @@ $(document).ready(function () {
 
 
                 var element = document.getElementById("videoContainer");
+                element.appendChild(number);
                 element.appendChild(para);
                 element.appendChild(row);
 
@@ -115,4 +133,12 @@ function liked(clicked_id) {
     }).then(function (value) {
         document.getElementById("text/" + clicked_id).innerText = value;
     })
+
+    var button = document.getElementById(clicked_id);
+    button.className = "btn right-align waves-effect waves-light col s4 disabled";
+    button.setAttribute("type", "submit");
+    button.setAttribute("name", "action");
+    button.setAttribute("id", value[i].name);
+    button.setAttribute("onclick", "liked(this.id)");
+
 }

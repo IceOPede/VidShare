@@ -126,4 +126,38 @@ public class PersonDAO {
             }
         }
     }
+
+    public Person checkPersonOnlyByEmail(String email) {
+
+        String sql = "SELECT * FROM PERSON WHERE email=?";
+
+        Connection conn = null;
+
+        try {
+
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            Person person = null;
+            if (rs.next()) {
+                person = new Person(rs.getString("PERSONID"),
+                        rs.getString("NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PW")
+                );
+            }
+            return person;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
 }
