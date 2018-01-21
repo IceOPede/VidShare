@@ -50,7 +50,7 @@ public class App {
         Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:Index.html");
+        return new ModelAndView("redirect:index.html");
     }
 
     @RequestMapping(value = "/uploadURL", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -63,7 +63,7 @@ public class App {
 
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:Index.html");
+        return new ModelAndView("redirect:index.html");
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
@@ -76,7 +76,7 @@ public class App {
 
         personDAO.addPerson(person);
 
-        return new ModelAndView("redirect:Index.html");
+        return new ModelAndView("redirect:index.html");
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
@@ -91,7 +91,7 @@ public class App {
 
         if (check != null) {
             System.out.println("Success");
-            return new ModelAndView("redirect:Index.html");
+            return new ModelAndView("redirect:index.html");
         } else {
             System.out.println("Error");
             return new ModelAndView("redirect:login.html");
