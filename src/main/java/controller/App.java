@@ -8,6 +8,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.ListFolderResult;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,14 @@ public class App {
 
     @RequestMapping("/getVideos")
     @ResponseBody
-    public List<Video> videoService() {
+    public List<Video> videoService() throws DbxException {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+
+        DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
+        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+
+        ListFolderResult result = client.files().listFolder("/static/Videos");
 
         List<Video> videoList = videoDAO.listVideo();
 
@@ -55,7 +61,7 @@ public class App {
         InputStream in =  new BufferedInputStream(file.getInputStream());
         FileMetadata metadata = client.files().uploadBuilder("/static/Videos/"+(videoList.size() + 1) + ".mp4").uploadAndFinish(in);
 
-        Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
+        Video video = new Video(client.files().getTemporaryLink(metadata.getPathLower()).getLink(), Video.Type.LINK);
         videoDAO.addVideo(video);
 
         return new ModelAndView("redirect:index.html");
