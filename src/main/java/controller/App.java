@@ -137,11 +137,26 @@ public class App {
     }
 
     @RequestMapping(value = "/allTopVideos")
-    public List<Video> topVideos() {
+    public List<Video> topVideos() throws DbxException {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
         VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
 
+        DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
+        DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+
         List<Video> videoList = videoDAO.getTopVideos();
+
+        for (Video video: videoList){
+            if (video.getType().name().equals(Video.Type.VIDEO.name())){
+                ListFolderResult result = client.files().listFolder("/static/Videos");
+                for (Metadata metadata : result.getEntries()){
+                    if (metadata.getName().equals(video.getName())){
+                        video.setUrl(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
+                    }
+                }
+            }
+        }
+
 
         return videoList;
     }
