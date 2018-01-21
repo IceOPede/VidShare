@@ -9,6 +9,7 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
+import com.dropbox.core.v2.files.Metadata;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,16 @@ public class App {
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
-        ListFolderResult result = client.files().listFolder("/static/Videos");
+        for (Video video: videoDAO.listVideo()){
+            if (video.getType().name().equals(Video.Type.VIDEO.name())){
+                ListFolderResult result = client.files().listFolder("/static/Videos");
+                for (Metadata metadata : result.getEntries()){
+                    if (metadata.getName().equals(video.getName())){
+                        video.setName(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
+                    }
+                }
+            }
+        }
 
         List<Video> videoList = videoDAO.listVideo();
 
@@ -61,7 +71,7 @@ public class App {
         InputStream in =  new BufferedInputStream(file.getInputStream());
         FileMetadata metadata = client.files().uploadBuilder("/static/Videos/"+(videoList.size() + 1) + ".mp4").uploadAndFinish(in);
 
-        Video video = new Video(client.files().getTemporaryLink(metadata.getPathLower()).getLink(), Video.Type.LINK);
+        Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
 
         return new ModelAndView("redirect:index.html");
