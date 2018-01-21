@@ -28,9 +28,19 @@
 <body>
 <header>
     <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="Index.html" class="brand-logo">Logo</a>
-            <ul class="right">
+        <div class="nav-wrapper">
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="Index.html"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="topVideos.html"><i class="material-icons left">star</i>Top Videos</a></li>
+                <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
+                <li><a href="register.html"><i class="material-icons left">person_add</i>Register</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="Index.html"><i class="material-icons left">home</i>Home</a></li>
                 <li><a href="topVideos.html"><i class="material-icons left">star</i>Top Videos</a></li>
                 <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
                 <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
@@ -41,7 +51,6 @@
 </header>
 
 <main>
-
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
@@ -58,7 +67,6 @@
             <br><br>
         </div>
     </div>
-
 </main>
 
 <footer class="page-footer orange">
