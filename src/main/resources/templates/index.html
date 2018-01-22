@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
@@ -9,11 +9,11 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <!--<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script>
 
@@ -30,27 +30,33 @@
 <script src="/js/materialize.js"></script>
 <!--<script src="js/init.js"></script>-->
 
-<script src="/Scripts/allVideosScript.js"></script>
+<script src="Scripts/allVideosScript.js"></script>
 
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
-                <li><a href="index.html"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="topVideos.html"><i class="material-icons left">star</i>Top Videos</a></li>
-                <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li><a href="index"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="topVideos"><i class="material-icons left">star</i>Top Videos</a></li>
+                <li><a href="uploadSite"><i class="material-icons left">file_upload</i>Upload</a></li>
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
-                <li><a href="register.html"><i class="material-icons left">person_add</i>Register</a></li>
+                <li><a href="login"><i class="material-icons left">person</i>Login</a></li>
+                <li><a href="register"><i class="material-icons left">person_add</i>Register</a></li>
+                <li>
+                    <div sec:authorize="hasRole('USER')">
+                        Hallo
+                    </div>
+                </li>
+
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="index.html"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="topVideos.html"><i class="material-icons left">star</i>Top Videos</a></li>
-                <li><a href="uploadSite.html"><i class="material-icons left">file_upload</i>Upload</a></li>
-                <li><a href="login.html"><i class="material-icons left">person</i>Login</a></li>
-                <li><a href="register.html"><i class="material-icons left">person_add</i>Register</a></li>
+                <li><a href="index"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="topVideos"><i class="material-icons left">star</i>Top Videos</a></li>
+                <li><a href="uploadSite"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li><a href="login"><i class="material-icons left">person</i>Login</a></li>
+                <li><a href="register"><i class="material-icons left">person_add</i>Register</a></li>
             </ul>
         </div>
     </nav>
