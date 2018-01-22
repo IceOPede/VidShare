@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/getVideos",
                         "/registerUser",
                         "/loginUser",
-                        "/like",
+//                        "/like",
                         "/allTopVideos",
                         "/css/**",
                         "/js/**",
