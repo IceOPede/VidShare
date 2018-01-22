@@ -8,7 +8,7 @@ $(document).ready(function () {
         for (i = 0; i < value.length; i++) {
             if (value[i].type == "VIDEO") {
 
-                var number = document.createElement("span");
+                var number = document.createElement("p");
                 number.setAttribute("class", "black-text col s1");
                 number.setAttribute("id", "text/" + value[i].name);
                 number.style["font-size"] = "35px";

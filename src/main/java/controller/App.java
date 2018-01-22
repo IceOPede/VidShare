@@ -99,23 +99,21 @@ public class App {
         return new ModelAndView("redirect:index.html");
     }
 
-    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("email") String email, @RequestParam("pw") String pw) {
-
-        PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
-
-        Person check = personDAO.checkPersonByEmail(email, pw);
-
-        if (check != null) {
-            System.out.println("Success");
-            return new ModelAndView("redirect:index.html");
-        } else {
-            System.out.println("Error");
-            return new ModelAndView("redirect:login.html");
-        }
-
-
-    }
+//    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+//    public ModelAndView login(@RequestParam("email") String email, @RequestParam("pw") String pw) {
+//
+//        PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
+//
+//        Person check = personDAO.checkPersonByEmail(email, pw);
+//
+//        if (check != null) {
+//            System.out.println("Success");
+//            return new ModelAndView("redirect:index.html");
+//        } else {
+//            System.out.println("Error");
+//            return new ModelAndView("redirect:login.html");
+//        }
+//    }
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public int like(@RequestParam("name") String name) {
