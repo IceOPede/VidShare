@@ -30,8 +30,7 @@ public class App {
     @RequestMapping("/getVideos")
     @ResponseBody
     public List<Video> videoService() throws DbxException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+        VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
@@ -55,8 +54,7 @@ public class App {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam("file") MultipartFile file) throws IOException, DbxException {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+        VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
         List<String> videoList =  videoDAO.getVideoNameList();
 
@@ -80,8 +78,7 @@ public class App {
     @RequestMapping(value = "/uploadURL", method = RequestMethod.POST)
     public ModelAndView uploadURL(@RequestParam("URL") String url) throws IOException {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+        VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
         Video video = new Video("https://www.youtube.com/embed/"+url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
 
@@ -95,8 +92,7 @@ public class App {
 
         Person person = new Person(null, name, email, pw);
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
+        PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
 
         personDAO.addPerson(person);
 
@@ -106,12 +102,9 @@ public class App {
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam("email") String email, @RequestParam("pw") String pw) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        PersonDAO personDAO = (PersonDAO) context.getBean("personDAO");
+        PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
 
         Person check = personDAO.checkPersonByEmail(email, pw);
-
-//        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 
         if (check != null) {
             System.out.println("Success");
@@ -127,8 +120,7 @@ public class App {
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public int like(@RequestParam("name") String name) {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+        VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
         Video video = videoDAO.getVideobyName(name);
         video.liked();
@@ -138,8 +130,8 @@ public class App {
 
     @RequestMapping(value = "/allTopVideos")
     public List<Video> topVideos() throws DbxException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        VideoDAO videoDAO = (VideoDAO) context.getBean("videoDAO");
+
+        VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);

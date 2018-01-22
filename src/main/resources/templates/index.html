@@ -9,21 +9,28 @@
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <!--<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 
+    <script>
+
+        $(document).ready(function () {
+            $(".button-collapse").sideNav();
+        });
+
+    </script>
 </head>
 <body>
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
+<script src="/js/materialize.js"></script>
 <!--<script src="js/init.js"></script>-->
 
-<script src="Scripts/topVideoScript.js"></script>
+<script src="/Scripts/allVideosScript.js"></script>
 
 <header>
     <nav class="light-blue lighten-1" role="navigation">
@@ -53,9 +60,10 @@
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="header center orange-text">Top Videos</h1>
+            <h1 class="header center orange-text">All Videos</h1>
         </div>
     </div>
+
     <div class="container">
         <div class="section">
             <!--   Icon Section   -->
@@ -71,41 +79,22 @@
     </div>
 </main>
 
-
 <footer class="page-footer orange">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
+            <div class="s12">
+                <h5 class="white-text">VidShare</h5>
+                <p class="grey-text text-lighten-4">
+                    VidShare ist eine Platform auf der Videos mit anderen Leuten teilen kann.
+                    We are a team of college students working on this project like it's
                     our full time job. Any amount would help support and continue development on this project and is
                     greatly appreciated.</p>
-
-
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
-            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            Copyright © 2018 Patric Burgherr
         </div>
     </div>
 </footer>

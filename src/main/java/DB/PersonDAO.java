@@ -2,17 +2,22 @@ package DB;
 
 import Beans.Person;
 import Beans.Video;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDAO {
 
     private DataSource dataSource;
+
+    public static ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -51,7 +56,39 @@ public class PersonDAO {
     }
 
     public List<Person> listPerson() {
-        return null;
+
+        List<Person> personList = new ArrayList<>();
+
+        String sql = "SELECT * FROM PERSON";
+
+        Connection conn = null;
+
+        try {
+            conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                personList.add(new Person(
+                        rs.getString("PERSONID"),
+                        rs.getString("NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PW")));
+
+            }
+            rs.close();
+            ps.close();
+            return personList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+
     }
 
     public Person getPersonById(int id) {
