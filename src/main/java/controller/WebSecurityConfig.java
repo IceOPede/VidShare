@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/allTopVideos",
                         "/css/**",
                         "/js/**",
-                        "/Script/**",
+                        "/Scripts/**",
                         "/Videos/**",
                         "/webjars/**").permitAll()
                 .anyRequest().authenticated()
