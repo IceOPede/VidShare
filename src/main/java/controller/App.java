@@ -116,7 +116,7 @@ public class App {
 //    }
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
-    public Video like(@RequestParam("name") String name) {
+    public int like(@RequestParam("name") String name) {
 
         VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
@@ -124,7 +124,7 @@ public class App {
         video.liked();
         videoDAO.updateVideo(video);
 
-        return video;
+        return video.getLikes();
     }
 
     @RequestMapping(value = "/allTopVideos")
