@@ -32,14 +32,6 @@ public class App {
 
     private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
 
-
-    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
-
-    @Autowired
-    public App(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
-        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
-    }
-
     @RequestMapping("/getVideos")
     @ResponseBody
     public List<Video> videoService() throws DbxException {
@@ -108,8 +100,6 @@ public class App {
         PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
 
         personDAO.addPerson(person);
-
-        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
 
         return new ModelAndView("redirect:index.html");
     }
