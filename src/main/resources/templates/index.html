@@ -45,8 +45,8 @@
                 <li><a href="login"><i class="material-icons left">person</i>Login</a></li>
                 <li><a href="register"><i class="material-icons left">person_add</i>Register</a></li>
                 <li>
-                    <div sec:authorize="hasRole('USER')">
-                        Hallo
+                    <div sec:authorize="isAuthenticated()">
+                        HEYYYY!!!!!!!!!!
                     </div>
                 </li>
 
