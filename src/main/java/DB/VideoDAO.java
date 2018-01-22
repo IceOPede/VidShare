@@ -1,6 +1,8 @@
 package DB;
 
 import Beans.Video;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -18,6 +20,9 @@ public class VideoDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
+    public static ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+
 
     public void addVideo(Video p) {
         String sql = "INSERT INTO VIDEO (NAME, LIKES, TYPE) VALUES (?, ?, ?)";
