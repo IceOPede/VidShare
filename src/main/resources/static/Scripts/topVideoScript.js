@@ -134,11 +134,11 @@ function liked(clicked_id) {
         document.getElementById("text/" + clicked_id).innerText = value;
     })
 
-    // var button = document.getElementById(clicked_id);
-    // button.className = "btn right-align waves-effect waves-light col s4 disabled";
-    // button.setAttribute("type", "submit");
-    // button.setAttribute("name", "action");
-    // button.setAttribute("id", value[i].name);
-    // button.setAttribute("onclick", "liked(this.id)");
+    var button = document.getElementById(clicked_id);
+    button.className = "btn right-align waves-effect waves-light col s4 disabled";
+    button.setAttribute("type", "submit");
+    button.setAttribute("name", "action");
+    button.setAttribute("id", value[i].name);
+    button.setAttribute("onclick", "liked(this.id)");
 
 }
