@@ -31,6 +31,8 @@ import java.util.List;
 @RestController
 public class App {
 
+    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    
     private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
 
 
@@ -112,6 +114,10 @@ public class App {
 
         inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
 
+        LOG.info("Neu User Added = {}", inMemoryUserDetailsManager.userExists(person.getEmail()));
+
+        LOG.info("Neuer User infos {} | {}", inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getUsername(), inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getPassword());
+        
         return new ModelAndView("redirect:login");
     }
 
