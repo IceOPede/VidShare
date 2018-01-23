@@ -38,7 +38,7 @@ $(document).ready(function () {
                 button.setAttribute("onclick", "liked(this.id)");
 
                 var likes = document.createElement("span");
-                likes.setAttribute("class", "black-text col s1 offset-s5");
+                likes.setAttribute("class", "black-text col s1 offset-s10");
                 likes.setAttribute("id", "text/" + value[i].name);
                 likes.style["font-size"] = "25px";
                 var likesText = document.createTextNode(value[i].likes);
@@ -96,7 +96,7 @@ $(document).ready(function () {
                 button.setAttribute("onclick", "liked(this.id)");
 
                 var likes = document.createElement("span");
-                likes.setAttribute("class", "black-text col s1 offset-s7");
+                likes.setAttribute("class", "black-text col s1 offset-s10");
                 likes.setAttribute("id", "text/" + value[i].name);
                 likes.style["font-size"] = "25px";
                 var likesText = document.createTextNode(value[i].likes);
