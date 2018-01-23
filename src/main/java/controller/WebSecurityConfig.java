@@ -38,11 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/home",
                         "/topVideos",
                         "/register",
-                        "/getVideos",
-                        "/registerUser",
                         "/loginUser",
-//                        "/like",
-                        "/allTopVideos",
                         "/css/**",
                         "/js/**",
                         "/Scripts/**",
@@ -65,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/like", "/registerUser");
+        web.ignoring().antMatchers("/getVideos", "/upload", "/uploadURL", "/registerUser", "/like", "/allTopVideos");
     }
 
     @Autowired
