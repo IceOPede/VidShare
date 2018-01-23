@@ -59,6 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+        
+         http.userDetailsService(inMemoryUserDetailsManager());
     }
 
     @Override
