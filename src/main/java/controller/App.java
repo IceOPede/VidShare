@@ -34,11 +34,11 @@ public class App {
     private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
 
 
-    private final AuthenticationManagerBuilder auth;
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
     @Autowired
-    public App(AuthenticationManagerBuilder auth) {
-        this.auth = auth;
+    public App(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
     }
 
     @RequestMapping("/getVideos")
@@ -110,11 +110,7 @@ public class App {
 
         personDAO.addPerson(person);
 
-        try {
-            auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}"+person.getPw()).roles("USER");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
 
         return new ModelAndView("redirect:index.html");
     }
