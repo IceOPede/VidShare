@@ -75,4 +75,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}"+person.getPw()).roles("USER");
         }
     }
+
+    @Bean
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+        final Properties users = new Properties();
+        users.put("USER","pass,ROLE_USER,enabled"); //add whatever other user you need
+        return new InMemoryUserDetailsManager(users);
+    }
+    
 }
