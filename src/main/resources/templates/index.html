@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>Home</title>
 
@@ -29,15 +30,14 @@
 <!--<script src="js/init.js"></script>-->
 
 <script src="Scripts/allVideosScript.js"></script>
-
 <header>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper">
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
-                <li class="active"><a href="index"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="topVideos"><i class="material-icons left">star</i>Top Videos</a></li>
-                <li><a href="uploadSite"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li class="active"><a href="index" th:utext="#{lang.nav.home}"></a></li>
+                <li><a href="topVideos" th:utext="#{lang.nav.top}"></a></li>
+                <li><a href="uploadSite" th:utext="#{lang.nav.upload}"></a></li>
             </ul>
             <ul class="right hide-on-med-and-down">
                 <li>
@@ -47,48 +47,59 @@
                 </li>
                 <li>
                     <div sec:authorize="isAnonymous()">
-                        <a href="login"><i class="material-icons left">person</i>Login</a>
+                        <a href="login" th:utext="#{lang.nav.login}"></a>
                     </div>
                 </li>
                 <li>
                     <div sec:authorize="isAnonymous()">
-                        <a href="register"><i class="material-icons left">person_add</i>Register</a>
+                        <a href="register" th:utext="#{lang.nav.register}"></a>
                     </div>
                 </li>
                 <li>
                     <div sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" method="post">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Logout
-                            </button>
+                            <button class="btn waves-effect waves-light" type="submit" name="action" th:utext="#{lang.nav.logout}"></button>
                         </form>
                     </div>
                 </li>
+
+                <li>
+                    <a th:href="@{/index?lang=en}">Eng</a>
+                </li>
+                <li>
+                    <a th:href="@{/index?lang=ger}">Ger</a>
+                </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li class="active"><a href="index"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="topVideos"><i class="material-icons left">star</i>Top Videos</a></li>
-                <li><a href="uploadSite"><i class="material-icons left">file_upload</i>Upload</a></li>
+                <li class="active"><a href="index" th:utext="#{lang.nav.home}">Home</a></li>
+                <li><a href="topVideos" th:utext="#{lang.nav.top}">Top Videos</a></li>
+                <li><a href="uploadSite" th:utext="#{lang.nav.upload}">Upload</a></li>
                 <div sec:authorize="isAuthenticated()" class="center">
                     <li><a href="#" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a></li>
                 </div>
                 <div sec:authorize="isAuthenticated()" class="center">
                     <li>
                         <form th:action="@{/logout}" method="post">
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Logout
-                            </button>
+                            <button class="btn waves-effect waves-light" type="submit" name="action" th:utext="#{lang.nav.logout}"></button>
                         </form>
                     <li>
                 </div>
                 <div sec:authorize="isAnonymous()">
                     <li>
-                        <a href="login"><i class="material-icons left">person</i>Login</a>
+                        <a href="login" th:utext="#{lang.nav.login}"></a>
                     </li>
                 </div>
                 <div sec:authorize="isAnonymous()">
                     <li>
-                        <a href="register"><i class="material-icons left">person_add</i>Register</a>
+                        <a href="register" th:utext="#{lang.nav.register}"></a>
                     </li>
                 </div>
+                <li>
+                    <a th:href="@{/index?lang=en}">Eng</a>
+                </li>
+                <li>
+                    <a th:href="@{/index?lang=ger}">Ger</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -98,7 +109,7 @@
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="header center orange-text">All Videos</h1>
+            <h1 class="header center orange-text" th:utext="#{lang.home.titel}"></h1>
         </div>
     </div>
 
@@ -122,11 +133,7 @@
         <div class="row">
             <div class="s12">
                 <h5 class="white-text">VidShare</h5>
-                <p class="grey-text text-lighten-4">
-                    VidShare ist eine Platform auf der Videos mit anderen Leuten teilen kann.
-                    We are a team of college students working on this project like it's
-                    our full time job. Any amount would help support and continue development on this project and is
-                    greatly appreciated.</p>
+                <p class="grey-text text-lighten-4" th:utext="#{lang.footer}"></p>
             </div>
         </div>
     </div>

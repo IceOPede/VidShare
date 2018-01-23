@@ -56,8 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-        
-         http.userDetailsService(inMemoryUserDetailsManager());
+
+        http.userDetailsService(inMemoryUserDetailsManager());
     }
 
     @Override
@@ -72,16 +72,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         List<Person> personList = personDAO.listPerson();
 
-        for (Person person: personList){
-            auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}"+person.getPw()).roles("USER");
+        for (Person person : personList) {
+            auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}" + person.getPw()).roles("USER");
         }
     }
 
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         final Properties users = new Properties();
-        users.put("user","pass,USER,enabled"); //add whatever other user you need
+        users.put("user", "pass,USER,enabled"); //add whatever other user you need
         return new InMemoryUserDetailsManager(users);
     }
-    
+
 }
