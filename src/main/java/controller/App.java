@@ -114,7 +114,7 @@ public class App {
 
         personDAO.addPerson(person);
 
-        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
+        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), "{noop}"+person.getPw(), new ArrayList<GrantedAuthority>()));
 
         System.out.println("Neu User Added = "+ inMemoryUserDetailsManager.userExists(person.getEmail()));
 
