@@ -8,7 +8,7 @@ $(document).ready(function () {
         for (i = 0; i < value.length; i++) {
             if (value[i].type == "VIDEO") {
 
-                var number = document.createElement("span");
+                var number = document.createElement("p");
                 number.setAttribute("class", "black-text col s1");
                 number.setAttribute("id", "text/" + value[i].name);
                 number.style["font-size"] = "35px";
@@ -17,6 +17,7 @@ $(document).ready(function () {
 
                 var para = document.createElement("video");
                 para.className = "responsive-video";
+                para.setAttribute("controls", true);
                 para.setAttribute("controls", true);
                 var node = document.createElement("source");
                 node.setAttribute("src", "" + value[i].url);
@@ -37,7 +38,7 @@ $(document).ready(function () {
                 button.setAttribute("onclick", "liked(this.id)");
 
                 var likes = document.createElement("span");
-                likes.setAttribute("class", "black-text col s1 offset-s7");
+                likes.setAttribute("class", "black-text col s1 offset-s6");
                 likes.setAttribute("id", "text/" + value[i].name);
                 likes.style["font-size"] = "25px";
                 var likesText = document.createTextNode(value[i].likes);

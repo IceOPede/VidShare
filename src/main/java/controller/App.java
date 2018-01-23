@@ -10,19 +10,15 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -116,28 +112,8 @@ public class App {
 
         inMemoryUserDetailsManager.createUser(new User(person.getEmail(), "{noop}"+person.getPw(), new ArrayList<GrantedAuthority>()));
 
-        System.out.println("Neu User Added = "+ inMemoryUserDetailsManager.userExists(person.getEmail()));
-
-        System.out.println("Neuer User infos " + inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getUsername()+ " | " +inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getPassword());
-        
         return new ModelAndView("redirect:login");
     }
-
-//    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-//    public ModelAndView login(@RequestParam("email") String email, @RequestParam("pw") String pw) {
-//
-//        PersonDAO personDAO = (PersonDAO) PersonDAO.context.getBean("personDAO");
-//
-//        Person check = personDAO.checkPersonByEmail(email, pw);
-//
-//        if (check != null) {
-//            System.out.println("Success");
-//            return new ModelAndView("redirect:index.html");
-//        } else {
-//            System.out.println("Error");
-//            return new ModelAndView("redirect:login.html");
-//        }
-//    }
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
     public int like(@RequestParam("name") String name) {
