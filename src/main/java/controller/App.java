@@ -116,9 +116,9 @@ public class App {
 
         inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
 
-        LOG.info("Neu User Added = {}", inMemoryUserDetailsManager.userExists(person.getEmail()));
+        System.out.println("Neu User Added = "+ inMemoryUserDetailsManager.userExists(person.getEmail()));
 
-        LOG.info("Neuer User infos {} | {}", inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getUsername(), inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getPassword());
+        System.out.println("Neuer User infos " + inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getUsername()+ " | " +inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getPassword());
         
         return new ModelAndView("redirect:login");
     }
