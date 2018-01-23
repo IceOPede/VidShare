@@ -112,7 +112,7 @@ public class App {
 
         inMemoryUserDetailsManager.createUser(new User(person.getEmail(), person.getPw(), new ArrayList<GrantedAuthority>()));
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:login");
     }
 
 //    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
