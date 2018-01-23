@@ -13,6 +13,7 @@ import com.dropbox.core.v2.files.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,6 +21,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -30,7 +33,17 @@ import java.util.List;
 @RestController
 public class App {
 
+    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    
     private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
+
+
+    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
+
+    @Autowired
+    public App(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
+        this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
+    }
 
     @RequestMapping("/getVideos")
     @ResponseBody
@@ -77,7 +90,7 @@ public class App {
         Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:index");
     }
 
     @RequestMapping(value = "/uploadURL", method = RequestMethod.POST)
@@ -89,7 +102,7 @@ public class App {
 
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:index");
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
@@ -101,7 +114,13 @@ public class App {
 
         personDAO.addPerson(person);
 
-        return new ModelAndView("redirect:index.html");
+        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), "{noop}"+person.getPw(), new ArrayList<GrantedAuthority>()));
+
+        System.out.println("Neu User Added = "+ inMemoryUserDetailsManager.userExists(person.getEmail()));
+
+        System.out.println("Neuer User infos " + inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getUsername()+ " | " +inMemoryUserDetailsManager.loadUserByUsername(person.getEmail()).getPassword());
+        
+        return new ModelAndView("redirect:login");
     }
 
 //    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)

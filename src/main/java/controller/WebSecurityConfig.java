@@ -4,6 +4,8 @@ import Beans.Person;
 import DB.PersonDAO;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.Properties;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -38,11 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/home",
                         "/topVideos",
                         "/register",
-                        "/getVideos",
-                        "/registerUser",
                         "/loginUser",
-//                        "/like",
-                        "/allTopVideos",
                         "/css/**",
                         "/js/**",
                         "/Scripts/**",
@@ -61,11 +59,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+        
+         http.userDetailsService(inMemoryUserDetailsManager());
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/like", "/registerUser");
+        web.ignoring().antMatchers("/getVideos", "/upload", "/uploadURL", "/registerUser", "/like", "/allTopVideos");
     }
 
     @Autowired
@@ -79,4 +79,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}"+person.getPw()).roles("USER");
         }
     }
+
+    @Bean
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+        final Properties users = new Properties();
+        users.put("user","pass,USER,enabled"); //add whatever other user you need
+        return new InMemoryUserDetailsManager(users);
+    }
+    
 }
