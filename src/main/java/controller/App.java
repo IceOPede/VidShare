@@ -85,7 +85,7 @@ public class App {
         Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:index");
     }
 
     @RequestMapping(value = "/uploadURL", method = RequestMethod.POST)
@@ -97,7 +97,7 @@ public class App {
 
         videoDAO.addVideo(video);
 
-        return new ModelAndView("redirect:index.html");
+        return new ModelAndView("redirect:index");
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
