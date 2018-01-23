@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         List<Person> personList = personDAO.listPerson();
 
         for (Person person: personList){
-            auth.inMemoryAuthentication().withUser(person.getEmail()).password("{noop}"+person.getPw()).roles("USER");
+            auth.inMemoryAuthentication().withUser(person.getEmail()).password(person.getPw()).roles("USER");
         }
     }
 
