@@ -30,7 +30,7 @@ import java.util.List;
 public class App {
 
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
-    
+
     private static final String ACCESS_TOKEN = "93paGsy2SdkAAAAAAAABQLklTHl9Ok_x0G7rFYH7thCYUqp0GX9ReYf6lEsZXdlv";
 
 
@@ -51,11 +51,11 @@ public class App {
 
         List<Video> videoList = videoDAO.listVideo();
 
-        for (Video video: videoList){
-            if (video.getType().name().equals(Video.Type.VIDEO.name())){
+        for (Video video : videoList) {
+            if (video.getType().name().equals(Video.Type.VIDEO.name())) {
                 ListFolderResult result = client.files().listFolder("/static/Videos");
-                for (Metadata metadata : result.getEntries()){
-                    if (metadata.getName().equals(video.getName())){
+                for (Metadata metadata : result.getEntries()) {
+                    if (metadata.getName().equals(video.getName())) {
                         video.setUrl(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
                     }
                 }
@@ -70,7 +70,7 @@ public class App {
 
         VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
-        List<String> videoList =  videoDAO.getVideoNameList();
+        List<String> videoList = videoDAO.getVideoNameList();
 
 //        File cFile = new File(getClass().getResource("/static/Videos").getPath() + "/" + (videoList.size() + 1) + ".mp4");
 //        cFile.createNewFile();
@@ -80,10 +80,10 @@ public class App {
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
-        InputStream in =  new BufferedInputStream(file.getInputStream());
-        FileMetadata metadata = client.files().uploadBuilder("/static/Videos/"+(videoList.size() + 1) + ".mp4").uploadAndFinish(in);
+        InputStream in = new BufferedInputStream(file.getInputStream());
+        FileMetadata metadata = client.files().uploadBuilder("/static/Videos/" + (videoList.size() + 1) + ".mp4").uploadAndFinish(in);
 
-        Video video = new Video(""+(videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
+        Video video = new Video("" + (videoList.size() + 1) + ".mp4", Video.Type.VIDEO);
         videoDAO.addVideo(video);
 
         return new ModelAndView("redirect:index");
@@ -94,7 +94,7 @@ public class App {
 
         VideoDAO videoDAO = (VideoDAO) VideoDAO.context.getBean("videoDAO");
 
-        Video video = new Video("https://www.youtube.com/embed/"+url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
+        Video video = new Video("https://www.youtube.com/embed/" + url.split("\\W*((?i)watch\\?v=(?-i))\\W*")[1], Video.Type.LINK);
 
         videoDAO.addVideo(video);
 
@@ -110,7 +110,7 @@ public class App {
 
         personDAO.addPerson(person);
 
-        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), "{noop}"+person.getPw(), new ArrayList<GrantedAuthority>()));
+        inMemoryUserDetailsManager.createUser(new User(person.getEmail(), "{noop}" + person.getPw(), new ArrayList<GrantedAuthority>()));
 
         return new ModelAndView("redirect:login");
     }
@@ -137,18 +137,16 @@ public class App {
 
         List<Video> videoList = videoDAO.getTopVideos();
 
-        for (Video video: videoList){
-            if (video.getType().name().equals(Video.Type.VIDEO.name())){
+        for (Video video : videoList) {
+            if (video.getType().name().equals(Video.Type.VIDEO.name())) {
                 ListFolderResult result = client.files().listFolder("/static/Videos");
-                for (Metadata metadata : result.getEntries()){
-                    if (metadata.getName().equals(video.getName())){
+                for (Metadata metadata : result.getEntries()) {
+                    if (metadata.getName().equals(video.getName())) {
                         video.setUrl(client.files().getTemporaryLink(metadata.getPathLower()).getLink());
                     }
                 }
             }
         }
-
-
         return videoList;
     }
 

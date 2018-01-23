@@ -38,7 +38,7 @@ $(document).ready(function () {
                 button.setAttribute("onclick", "liked(this.id)");
 
                 var likes = document.createElement("span");
-                likes.setAttribute("class", "black-text col s1 offset-s6");
+                likes.setAttribute("class", "black-text col s1 offset-s5");
                 likes.setAttribute("id", "text/" + value[i].name);
                 likes.style["font-size"] = "25px";
                 var likesText = document.createTextNode(value[i].likes);
@@ -132,14 +132,14 @@ function liked(clicked_id) {
         url: "https://"+getUrl+"/like",
         data: {name: clicked_id} // parameters
     }).then(function (value) {
-        document.getElementById("text/" + clicked_id).innerText = value;
+        document.getElementById("text/" + clicked_id).innerText = value.like;
     })
 
     var button = document.getElementById(clicked_id);
     button.className = "btn right-align waves-effect waves-light col s4 disabled";
     button.setAttribute("type", "submit");
     button.setAttribute("name", "action");
-    button.setAttribute("id", value[i].name);
+    button.setAttribute("id", "text/"+value[i].name);
     button.setAttribute("onclick", "liked(this.id)");
 
 }
