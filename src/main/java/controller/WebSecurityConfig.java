@@ -79,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         final Properties users = new Properties();
-        users.put("USER","pass,ROLE_USER,enabled"); //add whatever other user you need
+        users.put("user","pass,USER,enabled"); //add whatever other user you need
         return new InMemoryUserDetailsManager(users);
     }
     
