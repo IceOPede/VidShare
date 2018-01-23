@@ -4,6 +4,7 @@ import Beans.Person;
 import DB.PersonDAO;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +25,8 @@ import java.util.List;
 import java.util.Properties;
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
+@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
