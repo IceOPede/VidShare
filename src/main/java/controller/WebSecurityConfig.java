@@ -27,7 +27,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebSecurity
-@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
