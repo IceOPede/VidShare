@@ -10,7 +10,7 @@ $(document).ready(function () {
 
                 var number = document.createElement("p");
                 number.setAttribute("class", "black-text col s1");
-                number.setAttribute("id", "text/" + value[i].name);
+                // number.setAttribute("id", "text/" + value[i].name);
                 number.style["font-size"] = "35px";
                 var numberText = document.createTextNode((i+1)+"#");
                 number.appendChild(numberText);
@@ -65,9 +65,9 @@ $(document).ready(function () {
 
             } else if (value[i].type == "LINK"){
 
-                var number = document.createElement("span");
+                var number = document.createElement("p");
                 number.setAttribute("class", "black-text col s1");
-                number.setAttribute("id", "text/" + value[i].name);
+                //number.setAttribute("id", "text/" + value[i].name);
                 number.style["font-size"] = "35px";
                 var numberText = document.createTextNode((i+1)+"#");
                 number.appendChild(numberText);
