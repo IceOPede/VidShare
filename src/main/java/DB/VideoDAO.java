@@ -81,7 +81,7 @@ public class VideoDAO {
     public List<Video> listVideo() {
         List<Video> videoNameList = new ArrayList<>();
 
-        String sql = "SELECT * FROM VIDEO";
+        String sql = "SELECT * FROM VIDEO ORDER BY VIDEOID DESC";
 
         Connection conn = null;
 
@@ -189,7 +189,7 @@ public class VideoDAO {
 
         List<String> videoNameList = new ArrayList<>();
 
-        String sql = "SELECT * FROM VIDEO";
+        String sql = "SELECT * FROM VIDEO ORDER BY VIDEOID DESC";
 
         Connection conn = null;
 
