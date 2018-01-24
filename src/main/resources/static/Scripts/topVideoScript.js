@@ -139,7 +139,7 @@ function liked(clicked_id) {
     button.className = "btn right-align waves-effect waves-light col s4 disabled";
     button.setAttribute("type", "submit");
     button.setAttribute("name", "action");
-    button.setAttribute("id", "text/"+clicked_id);
+    button.setAttribute("id", clicked_id);
     button.setAttribute("onclick", "liked(this.id)");
 
 }
