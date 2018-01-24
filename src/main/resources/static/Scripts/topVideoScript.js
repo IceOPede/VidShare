@@ -132,14 +132,14 @@ function liked(clicked_id) {
         url: "https://"+getUrl+"/like",
         data: {name: clicked_id} // parameters
     }).then(function (value) {
-        document.getElementById("text/" + clicked_id).innerText = value.like;
+        document.getElementById("text/" + clicked_id).innerText = value;
     })
 
     var button = document.getElementById(clicked_id);
     button.className = "btn right-align waves-effect waves-light col s4 disabled";
     button.setAttribute("type", "submit");
     button.setAttribute("name", "action");
-    button.setAttribute("id", "text/"+value[i].name);
+    button.setAttribute("id", "text/"+clicked_id);
     button.setAttribute("onclick", "liked(this.id)");
 
 }
